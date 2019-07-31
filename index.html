@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Qure.ai Stats</title>
+
+    <!-- styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <!--fonts-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather|Roboto+Slab&display=swap" rel="stylesheet">
+   <!-- csv to js object converter -->
+   <script src= "https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.5/jquery.csv.min.js"></script>
+    <!-- chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js"></script>
+    <script src="js/clientDetails.js"></script>
+
+  </head>
+  <body>
+  <!-- navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-white">
+      <a class="navbar-brand" href="index.html">Qure.ai</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#client-tile"><i class="fa fa-line-chart" aria-hidden="true"></i>   Client graph</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#table-tile"><i class="fa fa-table" aria-hidden="true"></i>   Client table</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#map-tile"><i class="fa fa-map-o" aria-hidden="true"></i>  Deployments map</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  <!-- navbar ends -->
+
+  <!-- main content of page -->
+    <div id="main-content">
+  	 <div id="heading">
+  		  <h6>Keep up with ground facts right here. Right now.</h6>
+  		  <p>DASHBOARD <br>by Qure.ai</p>
+  	 </div>
+      <div class="container-fluid">
+        <div class="row">
+      	<!-- total number of qXR scans -->
+          <div class="col-xl-3 col-md-6 col-sm-12">
+            <div class="tile flex-fill">
+              <div class="tile-body py-4">
+                <div class="media">
+                  <div class="media-image" style="color:#3498DB;"><i class="fa fa-hashtag" aria-hidden="true"></i></div>
+                  <div class="media-body">
+                    <h3 id="total-qXR">0</h3>
+                    <div>qXR scans to date</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- total number of qER scans -->
+          <div class="col-xl-3 col-md-6 col-sm-12">
+            <div class="tile flex-fill">
+              <div class="tile-body py-4">
+                <div class="media">
+                  <div class="media-image" style="color:#F5B041;"><i class="fa fa-hashtag" aria-hidden="true"></i></div>
+                  <div class="media-body">
+                    <h3 id="total-qER">0</h3>
+                    <div>qER scans to date</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- run time qXR -->
+          <div class="col-xl-3 col-md-6 col-sm-12">
+            <div class="tile flex-fill">
+              <div class="tile-body py-4">
+                <div class="media">
+                  <div class="media-image" style="color:#52BE80;"><i class="fa fa-repeat" aria-hidden="true"></i></div>
+                  <div class="media-body">
+                    <h3 id="runtime-qXR"></h3>
+                    <div>qXR runtime</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- run time qER -->
+          <div class="col-xl-3 col-md-6 col-sm-12">
+            <div class="tile flex-fill">
+              <div class="tile-body py-4">
+                <div class="media">
+                  <div class="media-image" style="color:#CB4335;"><i class="fa fa-repeat" aria-hidden="true"></i></div>
+                  <div class="media-body">
+                    <h3 id="runtime-qER"></h3>
+                    <div>qER runtime</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+        	<!-- averages scans per day -->
+          <div class="col-md-6 col-sm-12" id="avg-tile">
+            <div class="tile flex-fill">
+              <div class="tile-body py-4">
+                <div class="media">
+                  <div class="media-image"><i class="fa fa-bar-chart" aria-hidden="true"></i></div>
+                  <div class="media-body">
+                    <h3 id="avg-scans"></h3>
+                    <div>Average scans per day</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- number of ai tb positive scans to date -->
+          <div class="col-md-6 col-sm-12" id="tb-tile">
+            <div class="tile flex-fill">
+              <div class="tile-body py-4">
+                <div class="media">
+                  <div class="media-image"><i class="fa fa-plus-circle" aria-hidden="true"></i></div>
+                  <div class="media-body">
+                    <h3 id="tb-positive"></h3>
+                    <div>AI positive TB scans to date</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- client graph -->
+        <div class="row">
+          <div class="col-12" id="client-tile">
+            <div class="tile flex-fill">
+              <div class="canvas">
+                  <h3>Number of clients since inception</h3>
+                  <canvas id="client-graph"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- client table -->
+        <div class="row">
+          <div class="col-12 d-flex" id="table-tile">
+            <div class="tile flex-fill">
+              <div>
+                <h3>Client details table</h3>
+                <!-- current deployments table -->
+                <div id="client-table" class="table-wrapper-scroll-y my-custom-scrollbar">
+                  <h5>Current deployments</h5>
+                  <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Client</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">qXR</th>
+                        <th scope="col">qER</th>
+                        <th scope="col">Number of uploads</th>
+                        <th scope="col">Average scans per day</th>
+                        <th scope="col">Date of last scan</th>
+                      </tr>
+                    </thead>
+                    <tbody id="insertHere">
+                    </tbody>
+                  </table>
+                </div>
+                <!-- current deployments table ends -->
+                <!-- onpremise table -->
+                <div id="client-table" class="table-wrapper-scroll-y my-custom-scrollbar">
+                  <h5>Onsite deployments</h5>
+                  <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Client</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">qXR</th>
+                        <th scope="col">qER</th>
+                        <th scope="col">qCheck</th>
+                        <th scope="col">Number of uploads</th>
+                      </tr>
+                    </thead>
+                    <tbody id="insertHere2">
+                    </tbody>
+                  </table>
+                </div>
+                <!-- onpremise table ends -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- map of deployments -->
+        <div class="row">
+          <div class="col-12 d-flex" id="map-tile">
+            <div class="tile flex-fill">
+              <div>
+                <h3>Deployments made globally</h3>
+                <div id="map"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- map row ends -->
+      </div>
+    </div>
+
+    <!-- main content of page ends -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/Keyang/node-csvtojson/d41f44aa/browser/csvtojson.min.js"></script>
+    <!-- API for google maps -->
+   <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDa6S0br_gkb8T-cCn5R5lNRJbN3yfhz8&callback=initMap"></script> -->
+    <!-- my script -->
+    <script src="js/ajax-utils3.js"></script>
+   <script src="js/script3.js"></script>
+
+  </body>
+</html>
