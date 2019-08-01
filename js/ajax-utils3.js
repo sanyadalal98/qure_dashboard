@@ -4,7 +4,7 @@
 		var url = "https://content.dropboxapi.com/2/files/download"
 		var today = new Date();
 		var string1 = today.getDate() + "-" + ("0" + (today.getMonth() + 1)).slice(-2) + "-" + today.getFullYear();
-		var yesterday = new Date()
+		var yesterday = new Date();
 		yesterday.setDate(yesterday.getDate() - 1);
 		var string2 = yesterday.getDate() + "-" + ("0" + (yesterday.getMonth() + 1)).slice(-2) + "-" + yesterday.getFullYear();
 		if(qType == "qXR"){	
