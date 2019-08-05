@@ -324,7 +324,7 @@ $(function(){
 			var clientName = data1[entry][1];
 			if(qureTesting.includes(clientName)) continue;
 			if(misc.includes(clientName)){
-				clientName = "Miscellaneous";
+				clientName = "Others: PATH";
 			}
 			var datePieces = data1[entry][0].split('-');
 			var date = new Date(parseInt(datePieces[0]), (parseInt(datePieces[1]) - 1), parseInt(datePieces[2]));

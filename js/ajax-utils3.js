@@ -79,7 +79,7 @@
 				url: url,
 				headers:{
 					'Authorization': auth,
-					'Dropbox-API-Arg': JSON.stringify({"path": "/Onsite-Reports/onsite.csv"})
+					'Dropbox-API-Arg': JSON.stringify({"path": "/Onpremise-Reports/onpremise.csv"})
 				},
 				success: function(data, textStatus, jqXHR){
 					cb(csvJSON(data));
